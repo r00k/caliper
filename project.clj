@@ -16,7 +16,8 @@
                  [selmer "0.6.5"]
                  [lib-noir "0.8.1"]
                  [compojure "1.1.6"]
-                 [postgresql/postgresql "9.1-901.jdbc4"]]
+                 [postgresql/postgresql "9.1-901.jdbc4"]
+                 [hiccup "1.0.5"]]
   :ring {:handler caliper.handler/app,
          :init caliper.handler/init,
          :destroy caliper.handler/destroy}
