@@ -32,7 +32,7 @@
   :ragtime
   {:migrations ragtime.sql.files/migrations,
    :database
-   "jdbc:postgresql://localhost/caliper?user=db_user_name_here&password=db_user_password_here"}
+   "jdbc:postgresql://localhost/caliper"}
   :profiles
   {:uberjar {:aot :all},
    :production
