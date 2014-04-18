@@ -1,6 +1,7 @@
 (ns caliper.handler
   (:require [compojure.core :refer [defroutes]]
             [caliper.routes.home :refer [home-routes]]
+            [caliper.routes.clients :refer [client-routes]]
             [caliper.middleware :as middleware]
             [noir.util.middleware :refer [app-handler]]
             [compojure.route :as route]
@@ -40,11 +41,9 @@
   []
   (timbre/info "caliper is shutting down..."))
 
-
-
 (def app (app-handler
            ;; add your application routes here
-           [home-routes app-routes]
+           [client-routes home-routes app-routes]
            ;; add custom middleware here
            :middleware [middleware/template-error-page
                         middleware/log-request]

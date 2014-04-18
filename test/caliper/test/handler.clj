@@ -11,3 +11,8 @@
   (testing "not-found route"
     (let [response (app (request :get "/invalid"))]
       (is (= (:status response) 404)))))
+
+(deftest test-client
+  (testing "adding a new client"
+    (let [response (app (request :get "/clients/new"))]
+      (is (= (:status response) 200)))))
