@@ -10,6 +10,9 @@
 (defn create-client [client-attributes]
   (insert clients (values client-attributes)))
 
+(defn all-clients []
+  (select clients))
+
 ;; (defn update-user [id first-name last-name email]
 ;;   (update users
 ;;   (set-fields {:first_name first-name

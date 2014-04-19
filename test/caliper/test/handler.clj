@@ -13,6 +13,13 @@
       (is (= (:status response) 404)))))
 
 (deftest test-client
-  (testing "adding a new client"
+  (testing "GET /clients/new"
     (let [response (app (request :get "/clients/new"))]
-      (is (= (:status response) 200)))))
+      (is (= (:status response) 200))))
+  (testing "POST /clients"
+    (let [response (app (request :post "/clients" {:first_name "Ben"}))]
+      (is (= (:status response) 200))
+      (is (re-find #"Ben" (:body response))))))
+
+
+      
