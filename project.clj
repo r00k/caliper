@@ -6,7 +6,7 @@
                  [environ "0.4.0"]
                  [markdown-clj "0.9.41"]
                  [com.taoensso/timbre "3.1.6"]
-                 [korma "0.3.0-RC6"]
+                 [korma "0.3.1"]
                  [org.clojure/clojure "1.6.0"]
                  [com.taoensso/tower "2.0.2"]
                  [log4j "1.2.17" :exclusions [javax.mail/mail
@@ -18,7 +18,7 @@
                  [compojure "1.1.6"]
                  [postgresql/postgresql "9.1-901.jdbc4"]
                  [hiccup "1.0.5"]
-                 [clj-time "0.6.0"]]
+                 [clj-time "0.7.0"]]
   :ring {:handler caliper.handler/app,
          :init caliper.handler/init,
          :destroy caliper.handler/destroy}
