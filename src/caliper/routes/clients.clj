@@ -6,10 +6,17 @@
   (:require [caliper.views.layout :as layout]))
 
 (defn- client-form []
-  (f/form-to [:post "/clients"]
-             [:label { :for "first_name" } "First Name:"]
-             (f/text-field "first_name")
-             (f/submit-button "Create client")))
+  (f/form-to {:role "form"} [:post "/clients"]
+             [:legend "New client"]
+             [:div.form-group
+              [:label { :for "first_name" } "First name"]
+              (f/text-field {:class "form-control"} "first_name")]
+
+             [:div.form-group
+              [:label { :for "last_name" } "Last name"]
+              (f/text-field {:class "form-control"} "last_name")]
+
+             (f/submit-button {:class "btn btn-default"} "Create client")))
 
 (defn new-client []
   (layout/render
