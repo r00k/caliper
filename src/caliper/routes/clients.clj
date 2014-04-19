@@ -12,22 +12,28 @@
              (f/submit-button "Create client")))
 
 (defn new-client []
-  (html
-    (client-form)))
+  (layout/render
+    "app.html"
+    {:content (html (client-form))}))
 
 (defn client-index []
   (layout/render
     "app.html"
-    {:content 
-     (let [clients (db/all-clients)]
-       (html
-         [:h1 "All clients"]
-         [:ul
-          (for [{:keys [first_name date_of_birth date_of_accident]} clients]
-            [:li
-             [:p first_name]
-             [:p date_of_birth]
-             [:p date_of_accident]])]))}))
+    {:content (let [clients (db/all-clients)]
+                (html
+                  [:h2 "All clients"]
+                  [:table.table
+                   [:tr
+                    [:th "First name"]
+                    [:th "Last name"]
+                    [:th "DOB"]
+                    [:th "Date of accident"]]
+                   (for [{:keys [first_name last_name date_of_birth date_of_accident]} clients]
+                     [:tr
+                      [:td first_name]
+                      [:td last_name]
+                      [:td date_of_birth]
+                      [:td date_of_accident]])]))}))
 
 (defn create-client [params]
   (db/create-client params)
