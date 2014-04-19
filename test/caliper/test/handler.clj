@@ -20,6 +20,3 @@
     (let [response (app (request :post "/clients" {:first_name "Ben"}))]
       (is (= (:status response) 200))
       (is (re-find #"Ben" (:body response))))))
-
-
-      

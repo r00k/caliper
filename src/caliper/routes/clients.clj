@@ -2,7 +2,8 @@
   (:use compojure.core)
   (:require [hiccup.core :refer :all])
   (:require [hiccup.form :as f])
-  (:require [caliper.models.db :as db]))
+  (:require [caliper.models.db :as db])
+  (:require [caliper.views.layout :as layout]))
 
 (defn- client-form []
   (f/form-to [:post "/clients"]
@@ -15,15 +16,18 @@
     (client-form)))
 
 (defn client-index []
-  (let [clients (db/all-clients)]
-    (html
-      [:h1 "All clients"]
-      [:ul
-       (for [{:keys [first_name date_of_birth date_of_accident]} clients]
-         [:li
-          [:p first_name]
-          [:p date_of_birth]
-          [:p date_of_accident]])])))
+  (layout/render
+    "app.html"
+    {:content 
+     (let [clients (db/all-clients)]
+       (html
+         [:h1 "All clients"]
+         [:ul
+          (for [{:keys [first_name date_of_birth date_of_accident]} clients]
+            [:li
+             [:p first_name]
+             [:p date_of_birth]
+             [:p date_of_accident]])]))}))
 
 (defn create-client [params]
   (db/create-client params)
