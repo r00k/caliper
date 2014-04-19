@@ -3,7 +3,8 @@
         [korma.db :only (defdb)])
   (:require [caliper.models.schema :as schema])
   (:require [clj-time.format :as time])
-  (:require [clj-time.coerce :as coerce]))
+  (:require [clj-time.coerce :as coerce])
+  (:require [clj-time.core :as time-core]))
 
 (defdb db schema/db-spec)
 
@@ -12,7 +13,10 @@
 (defn str->date [date-string]
   "Takes 2014-04-19 and puts in in db-ready format"
   (when date-string
-    (coerce/to-sql-date (time/parse (time/formatters :date) date-string))))
+    (coerce/to-sql-date 
+      (time-core/from-time-zone
+        (time/parse (time/formatters :date) date-string)
+        (time-core/time-zone-for-offset -4)))))
 
 (defn parse-dates [m]
   (assoc m :date_of_birth (str->date (:date_of_birth m))))

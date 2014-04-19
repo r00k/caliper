@@ -4,11 +4,11 @@
 
 (deftest test-str->date
   (testing "returns a tagged literal date"
-    (is (= #inst "2014-04-16" (str->date "2014-04-16")))))
+    (is (= #inst "2014-04-16T00:00:00.000-04:00" (str->date "2014-04-16")))))
 
 (deftest test-parse-dates
   (testing "returns a map with the dates parsed into sql-friendly form"
-    (is (= {:date_of_birth #inst "1983-04-16"}
+    (is (= {:date_of_birth #inst "1983-04-16T00:00:00.000-04:00"}
            (parse-dates {:date_of_birth "1983-04-16"})))))
 
 (deftest roundtrip
