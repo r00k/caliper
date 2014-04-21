@@ -17,7 +17,9 @@
       (str date-string "T12:00:00"))))
 
 (defn parse-dates [m]
-  (assoc m :date_of_birth (str->date (:date_of_birth m))))
+  (-> m
+      (assoc :date_of_birth (str->date (:date_of_birth m)))
+      (assoc :date_of_accident (str->date (:date_of_accident m)))))
 
 (defn create-client [client-attributes]
   (let [parsed-attributes (parse-dates client-attributes)]
