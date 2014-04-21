@@ -2,6 +2,7 @@
   (:require [compojure.core :refer [defroutes]]
             [caliper.routes.home :refer [home-routes]]
             [caliper.routes.clients :refer [client-routes]]
+            [caliper.routes.records-departments :refer [records-departments-routes]]
             [caliper.middleware :as middleware]
             [noir.util.middleware :refer [app-handler]]
             [compojure.route :as route]
@@ -43,7 +44,7 @@
 
 (def app (app-handler
            ;; add your application routes here
-           [client-routes home-routes app-routes]
+           [client-routes home-routes app-routes records-departments-routes]
            ;; add custom middleware here
            :middleware [middleware/template-error-page
                         middleware/log-request]
