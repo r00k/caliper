@@ -44,7 +44,7 @@
 
 (def app (app-handler
            ;; add your application routes here
-           [client-routes home-routes app-routes records-departments-routes]
+           [client-routes home-routes records-departments-routes app-routes]
            ;; add custom middleware here
            :middleware [middleware/template-error-page
                         middleware/log-request]

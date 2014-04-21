@@ -6,8 +6,20 @@
   (:require [caliper.views.layout :as layout])
   (:require [compojure.core :refer [defroutes]]))
 
+(defn- records-department-form []
+  (f/form-to {:role "form"} [:post "/records-departments"]
+             [:legend "New records dept"]
+
+             [:div.form-group
+              [:label { :for "Department title" } "Department title"]
+              (f/text-field {:class "form-control"} "department_title")]
+
+             (f/submit-button {:class "btn btn-default"} "Create records dept")))
+
 (defn new-records-department []
-  "hey")
+  (layout/render
+    "app.html"
+    {:content (html (records-department-form))}))
 
 (defroutes records-departments-routes
-  (GET "/record-departments/new" [] (new-records-department)))
+  (GET "/records-departments/new" [] (new-records-department)))

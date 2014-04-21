@@ -6,4 +6,4 @@
 (deftest test-new-records-department
   (testing "GET /record-departments/new"
     (let [response (app (request :get "/records-department/new"))]
-      (is (= (:status response) 200))))
+      (is (= (:status response) 200)))))
