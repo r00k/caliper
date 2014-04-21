@@ -8,6 +8,7 @@
 
 (defdb db schema/db-spec)
 
+;; Clients 
 (defentity clients)
 
 (defn str->date [date-string]
@@ -32,6 +33,16 @@
   (first (select clients
                  (where {:id id})
                  (limit 1))))
+
+
+;; Records depts
+(defentity records_departments)
+
+(defn all-records-departments []
+  (select records_departments))
+
+(defn create-records-department [records-dept-attributes]
+  (insert records_departments (values records-dept-attributes)))
 
 ;; (defn update-user [id first-name last-name email]
 ;;   (update users
