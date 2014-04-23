@@ -46,8 +46,7 @@
            ;; add your application routes here
            [client-routes home-routes records-departments-routes app-routes]
            ;; add custom middleware here
-           :middleware [middleware/template-error-page
-                        middleware/log-request]
+           :middleware [middleware/template-error-page]
            ;; add access rules here
            :access-rules []
            ;; serialize/deserialize the following data formats

@@ -1,7 +1,13 @@
 (ns caliper.test.records-departments-routes
   (:use clojure.test
         ring.mock.request
-        caliper.handler))
+        caliper.handler)
+  (:require [caliper.models.db :as db]))
+
+(defn clean-database [f]
+  (db/destroy-all-records-departments)
+  (f))
+(use-fixtures :each clean-database)
 
 (deftest REST-for-departments
   (testing "GET /records-departments/new"
@@ -17,5 +23,5 @@
       (is (= (:status response) 200))
       (is (re-find #"DFCI Records Dept" (:body response)))
       (is (re-find #"Dana-Farber" (:body response)))
-      #_(is (re-find #"1983-04-16" (:body response)))
-      #_(is (re-find #"2014-04-01" (:body response))))))
+      (is (re-find #"123 Main St" (:body response)))
+      (is (re-find #"Boston MA 02114" (:body response))))))

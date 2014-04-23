@@ -44,6 +44,9 @@
 (defn create-records-department [records-dept-attributes]
   (insert records_departments (values records-dept-attributes)))
 
+(defn destroy-all-records-departments []
+  (delete records_departments))
+
 ;; (defn update-user [id first-name last-name email]
 ;;   (update users
 ;;   (set-fields {:first_name first-name

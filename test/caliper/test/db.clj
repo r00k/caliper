@@ -12,3 +12,10 @@
             :date_of_accident #inst "2014-04-01T12:00:00-00:00"}
            (parse-dates {:date_of_birth "1983-04-16"
                          :date_of_accident "2014-04-01"})))))
+
+(deftest test-destroy-all-records-depts
+  (is (= []
+         (do
+           (create-records-department {:department_title "DFCI"})
+           (destroy-all-records-departments)
+           (all-records-departments)))))
