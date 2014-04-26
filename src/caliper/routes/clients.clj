@@ -36,7 +36,10 @@
     "app.html"
     {:content (let [clients (db/all-clients)]
                 (html
-                  [:h2 "All clients"]
+                  [:h2 "Clients"]
+                  [:p
+                   [:a {:href "/clients/new"} "Add new"]]
+                  [:br]
                   [:table.table
                    [:tr
                     [:th "First name"]

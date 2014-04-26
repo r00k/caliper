@@ -30,17 +30,19 @@
     "app.html"
     (let [records-departments (db/all-records-departments)]
       {:content (html
-                  [:h2 "All records-departments"]
+                  [:h2 "Records Departments"]
+                  [:p
+                   [:a {:href "/records-departments/new"} "Add new"]]
                   [:table.table
                    [:tr
                     [:th "Depaprtment title"]
                     [:th "Hospital name"]
                     [:th "Address line 1"]
                     [:th "Address line 2"]]
-                   (for [{:keys [department_title 
-                                 hospital_name 
-                                 address_line_1 
-                                 address_line_2]} 
+                   (for [{:keys [department_title
+                                 hospital_name
+                                 address_line_1
+                                 address_line_2]}
                          records-departments]
                      [:tr
                       [:td department_title]
@@ -59,4 +61,5 @@
 
 (defroutes records-departments-routes
   (GET "/records-departments/new" [] (new-records-department))
+  (GET "/records-departments" [] (records-departments-index))
   (POST "/records-departments" [_ :as request] (create-records-department (:params request))))
