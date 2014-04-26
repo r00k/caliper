@@ -18,11 +18,11 @@
 
              [:div.form-group
               [:label { :for "date_of_birth" } "Date of birth"]
-              (f/text-field {:class "form-control"} "date_of_birth")]
+              (f/text-field {:class "form-control" :placeholder "YYYY-MM-DD"} "date_of_birth")]
 
              [:div.form-group
               [:label { :for "date_of_accident" } "Date of accident"]
-              (f/text-field {:class "form-control"} "date_of_accident")]
+              (f/text-field {:class "form-control" :placeholder "YYYY-MM-DD"} "date_of_accident")]
 
              (f/submit-button {:class "btn btn-default"} "Create client")))
 
