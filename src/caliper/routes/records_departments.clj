@@ -18,10 +18,10 @@
               (f/text-field {:class "form-control"} "hospital_name")
 
               [:label { :for "Address line 1" } "Address line 1"]
-              (f/text-field {:class "form-control"} "address_line_1")
+              (f/text-field {:class "form-control" :placeholder "123 Main St."} "address_line_1")
 
               [:label { :for "Address line 2" } "Address line 2"]
-              (f/text-field {:class "form-control"} "address_line_2")]
+              (f/text-field {:class "form-control" :placeholder "Boston, MA 02114"} "address_line_2")]
 
              (f/submit-button {:class "btn btn-default"} "Create records dept")))
 
