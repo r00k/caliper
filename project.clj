@@ -24,9 +24,13 @@
          :destroy caliper.handler/destroy}
   :cucumber-feature-paths ["test/features/"]
   :ragtime {:migrations ragtime.sql.files/migrations,
-            :database
-            "jdbc:postgresql://localhost/caliper"}
-  :profiles {:uberjar {:aot :all},
+            :database (if (System/getenv "DATABASE_URL")
+                        (let [heroku-url (System/getenv "DATABASE_URL")
+                              db-uri (java.net.URI. heroku-url)
+                              [username password] (clojure.string/split (.getUserInfo db-uri) #":")]
+                          (str "jdbc:postgresql://" (.getHost db-uri) ":" (.getPort db-uri) (.getPath db-uri) "?user=" username "&password=" password))
+                        "jdbc:postgresql://localhost/caliper")}
+  :profiles {:uberjar {:aot :all}
              :production {:ring
                           {:open-browser? false, :stacktraces? false, :auto-reload? false}},
              :dev {:dependencies [[org.clojure/core.cache "0.6.3"]
@@ -40,4 +44,5 @@
             [lein-cucumber "1.0.2"]
             [ragtime/ragtime.lein "0.3.4"]]
   :description "FIXME: write description"
-  :min-lein-version "2.0.0")
+  :min-lein-version "2.0.0"
+  :main ^:skip-aot caliper.handler)

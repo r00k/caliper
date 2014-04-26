@@ -9,7 +9,9 @@
             [taoensso.timbre :as timbre]
             [taoensso.timbre.appenders.rotor :as rotor]
             [selmer.parser :as parser]
-            [environ.core :refer [env]]))
+            [environ.core :refer [env]]
+            [ring.adapter.jetty :as ring])
+  (:gen-class :main true))
 
 (defroutes app-routes
   (route/resources "/")
@@ -53,3 +55,6 @@
            ;; available formats:
            ;; :json :json-kw :yaml :yaml-kw :edn :yaml-in-html
            :formats [:json-kw :edn]))
+
+(defn -main []
+  (ring/run-jetty app {:port 8080 :join? false}))
