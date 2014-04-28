@@ -1,1 +1,10 @@
 Separate test and development db
+
+Feedback from Josh 4/28:
+- Make date entry MM/DD/YY
+- Add title field to rec depts for josh's own description
+- Editing of existing entries
+- Often doesn't want to request all records at once
+  - Would like to be able to request one at a time
+  - Should only be prompted with depts entered during client creation
+- DO want to ask about providers on client creation
