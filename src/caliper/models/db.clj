@@ -6,10 +6,13 @@
   (:require [clj-time.coerce :as coerce])
   (:require [clj-time.core :as t]))
 
+(declare clients records_departments)
+
 (defdb db schema/db-spec)
 
 ;; Clients 
-(defentity clients)
+(defentity clients
+  (many-to-many records_departments :clients_records_departments))
 
 (defn str->date [date-string]
   "returns a java.sql.Date for that day at noon"
@@ -36,7 +39,8 @@
 
 
 ;; Records depts
-(defentity records_departments)
+(defentity records_departments
+  (many-to-many clients :clients_records_departments))
 
 (defn all-records-departments []
   (select records_departments))
@@ -46,10 +50,3 @@
 
 (defn destroy-all-records-departments []
   (delete records_departments))
-
-;; (defn update-user [id first-name last-name email]
-;;   (update users
-;;   (set-fields {:first_name first-name
-;;                :last_name last-name
-;;                :email email})
-;;   (where {:id id})))
