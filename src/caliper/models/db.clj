@@ -4,7 +4,8 @@
   (:require [caliper.models.schema :as schema])
   (:require [clj-time.format :as time])
   (:require [clj-time.coerce :as coerce])
-  (:require [clj-time.core :as t]))
+  (:require [clj-time.core :as t])
+  (:require [clojure.walk :as walk]))
 
 (declare clients records_departments clients_records_departments)
 
@@ -26,21 +27,25 @@
       (assoc :date_of_accident (str->date (:date_of_accident m)))))
 
 (defn remove-records-departments-ids [m]
-  (dissoc m :records_department_id))
+  (dissoc m :records_department_ids))
 
 (defn parse-client-attributes [m]
   (-> m
       (parse-dates)
       (remove-records-departments-ids)))
 
-(defn create-clients-records-departments [client_id records_department_id]
+(defn create-clients-records-department [client_id records_department_id]
   (insert clients_records_departments (values {:clients_id client_id
                                                :records_departments_id records_department_id})))
 
+(defn create-clients-records-departments [client_id records_department_ids]
+  (doall
+    (map (partial create-clients-records-department client_id) records_department_ids)))
+
 (defn create-client [client-attributes]
-  (let [parsed-attributes (parse-client-attributes client-attributes)
+  (let [parsed-attributes (parse-client-attributes (walk/keywordize-keys client-attributes))
         client (insert clients (values parsed-attributes))]
-    (create-clients-records-departments (:id client) (:records_department_id client-attributes))
+    (create-clients-records-departments (:id client) (:records_department_ids client-attributes))
     client))
 
 (defn all-clients []

@@ -69,5 +69,5 @@
 
 (defroutes client-routes
   (GET "/clients/new" [] (new-client))
-  (POST "/clients" [_ :as request] (create-client (:params request)))
+  (POST "/clients" [_ :as request] (create-client (:form-params request)))
   (GET "/clients" [] (client-index)))
