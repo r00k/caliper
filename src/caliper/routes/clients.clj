@@ -9,11 +9,7 @@
   (for [{:keys [id department_title]} (db/all-records-departments)]
     [:div.checkbox
      [:label
-      [:input {:type "checkbox"
-               :id id
-               :name "records-department"
-               :value id
-               :checked nil}]
+      (f/check-box "records_department_id" false id)
       department_title]]))
 
 (defn- client-form []
