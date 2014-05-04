@@ -1,12 +1,9 @@
 (ns caliper.test.records-departments-routes
   (:use clojure.test
         ring.mock.request
-        caliper.handler)
-  (:require [caliper.models.db :as db]))
+        caliper.handler
+        caliper.test.support.db-cleaner))
 
-(defn clean-database [f]
-  (db/destroy-all-records-departments)
-  (f))
 (use-fixtures :each clean-database)
 
 (deftest REST-for-departments
