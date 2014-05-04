@@ -25,9 +25,23 @@
       (assoc :date_of_birth (str->date (:date_of_birth m)))
       (assoc :date_of_accident (str->date (:date_of_accident m)))))
 
+(defn remove-records-departments-ids [m]
+  (dissoc m :records_department_id))
+
+(defn parse-client-attributes [m]
+  (-> m
+      (parse-dates)
+      (remove-records-departments-ids)))
+
+(defn create-clients-records-departments [client_id records_department_id]
+  (insert clients_records_departments (values {:clients_id client_id
+                                               :records_departments_id records_department_id})))
+
 (defn create-client [client-attributes]
-  (let [parsed-attributes (parse-dates client-attributes)]
-    (insert clients (values parsed-attributes))))
+  (let [parsed-attributes (parse-client-attributes client-attributes)
+        client (insert clients (values parsed-attributes))]
+    (create-clients-records-departments (:id client) (:records_department_id client-attributes))
+    client))
 
 (defn all-clients []
   (select clients))

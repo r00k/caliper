@@ -1,6 +1,7 @@
 (ns caliper.test.db
   (:use clojure.test
-        caliper.models.db))
+        caliper.models.db
+        korma.core))
 
 (deftest test-str->date
   (testing "returns a java.sql.Date for that day at noon"
@@ -19,3 +20,11 @@
            (create-records-department {:department_title "DFCI"})
            (destroy-all-records-departments)
            (all-records-departments)))))
+
+(deftest test-create-client
+  (testing "creates join records for a single records department"
+    (let [records-department (create-records-department {:department_title "DFCI"})
+          client (create-client {:records_department_id (:id records-department)})]
+      (is (not-empty (select clients_records_departments 
+                             (where {:clients_id (:id client)
+                                     :records_departments_id (:id records-department)})))))))
