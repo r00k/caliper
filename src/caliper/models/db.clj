@@ -1,17 +1,28 @@
 (ns caliper.models.db
   (:use korma.core
-        [korma.db :only (defdb)])
+        [korma.db :only (defdb)]
+        [clojure.walk :only (keywordize-keys)])
   (:require [caliper.models.schema :as schema])
   (:require [clj-time.format :as time])
   (:require [clj-time.coerce :as coerce])
-  (:require [clj-time.core :as t])
-  (:require [clojure.walk :as walk]))
+  (:require [clj-time.core :as t]))
 
 (declare clients records_departments clients_records_departments)
 
 (defdb db schema/db-spec)
 
-;; Clients 
+;; ClientsRecordsDepartments
+(defentity clients_records_departments)
+
+(defn create-clients-records-department [client_id records_department_id]
+  (insert clients_records_departments (values {:clients_id client_id
+                                               :records_departments_id records_department_id})))
+
+(defn create-clients-records-departments [client_id records_department_ids]
+  (doall
+    (map (partial create-clients-records-department client_id) records_department_ids)))
+
+;; Clients
 (defentity clients
   (many-to-many records_departments :clients_records_departments))
 
@@ -31,21 +42,16 @@
 
 (defn parse-client-attributes [m]
   (-> m
+      (keywordize-keys)
       (parse-dates)
       (remove-records-departments-ids)))
 
-(defn create-clients-records-department [client_id records_department_id]
-  (insert clients_records_departments (values {:clients_id client_id
-                                               :records_departments_id records_department_id})))
-
-(defn create-clients-records-departments [client_id records_department_ids]
-  (doall
-    (map (partial create-clients-records-department client_id) records_department_ids)))
-
 (defn create-client [client-attributes]
-  (let [parsed-attributes (parse-client-attributes (walk/keywordize-keys client-attributes))
+  (let [parsed-attributes (parse-client-attributes client-attributes)
         client (insert clients (values parsed-attributes))]
-    (create-clients-records-departments (:id client) (:records_department_ids client-attributes))
+    (create-clients-records-departments
+      (:id client)
+      (:records_department_ids client-attributes))
     client))
 
 (defn all-clients []
@@ -70,7 +76,3 @@
 (defn destroy-all-records-departments []
   (delete clients_records_departments)
   (delete records_departments))
-
-
-;; ClientsRecordsDepartments
-(defentity clients_records_departments)
