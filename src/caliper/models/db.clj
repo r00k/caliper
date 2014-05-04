@@ -6,7 +6,7 @@
   (:require [clj-time.coerce :as coerce])
   (:require [clj-time.core :as t]))
 
-(declare clients records_departments)
+(declare clients records_departments clients_records_departments)
 
 (defdb db schema/db-spec)
 
@@ -49,4 +49,9 @@
   (insert records_departments (values records-dept-attributes)))
 
 (defn destroy-all-records-departments []
+  (delete clients_records_departments)
   (delete records_departments))
+
+
+;; ClientsRecordsDepartments
+(defentity clients_records_departments)
