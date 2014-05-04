@@ -1,4 +1,5 @@
 Separate test and development db
+Consistent database truncation between tests
 Start integration testing
 
 Feedback from Josh 4/28:
