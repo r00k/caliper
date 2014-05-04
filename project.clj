@@ -22,7 +22,6 @@
   :ring {:handler caliper.handler/app,
          :init caliper.handler/init,
          :destroy caliper.handler/destroy}
-  :cucumber-feature-paths ["test/features/"]
   :ragtime {:migrations ragtime.sql.files/migrations,
             :database (if (System/getenv "DATABASE_URL")
                         (let [heroku-url (System/getenv "DATABASE_URL")
@@ -41,7 +40,6 @@
   :url "http://example.com/FIXME"
   :plugins [[lein-ring "0.8.10"]
             [lein-environ "0.4.0"]
-            [lein-cucumber "1.0.2"]
             [ragtime/ragtime.lein "0.3.4"]]
   :description "FIXME: write description"
   :min-lein-version "2.0.0"
