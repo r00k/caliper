@@ -5,6 +5,17 @@
   (:require [caliper.models.db :as db])
   (:require [caliper.views.layout :as layout]))
 
+(defn records-departments-options []
+  (for [{:keys [id department_title]} (db/all-records-departments)]
+    [:div.checkbox
+     [:label
+      [:input {:type "checkbox"
+               :id id
+               :name "records-department"
+               :value id
+               :checked nil}]
+      department_title]]))
+
 (defn- client-form []
   (f/form-to {:role "form"} [:post "/clients"]
              [:legend "New client"]
@@ -23,6 +34,9 @@
              [:div.form-group
               [:label { :for "date_of_accident" } "Date of accident"]
               (f/text-field {:class "form-control" :placeholder "YYYY-MM-DD"} "date_of_accident")]
+
+             [:label {:for "treatments"} "Records Departments"]
+             (records-departments-options)
 
              (f/submit-button {:class "btn btn-default"} "Create client")))
 
