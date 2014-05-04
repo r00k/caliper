@@ -1,8 +1,11 @@
 (ns caliper.test.clients-routes
   (:use clojure.test
         ring.mock.request
-        caliper.handler)
+        caliper.handler
+        caliper.test.support.db-cleaner)
   (:require [caliper.models.db :as db]))
+
+(use-fixtures :each clean-database)
 
 (deftest test-client
   (testing "GET /clients/new"
