@@ -62,6 +62,9 @@
                  (where {:id id})
                  (limit 1))))
 
+(defn destroy-all-clients []
+  (delete clients_records_departments)
+  (delete clients))
 
 ;; Records depts
 (defentity records_departments

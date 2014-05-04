@@ -3,4 +3,5 @@
 
 (defn clean-database [f]
   (destroy-all-records-departments)
+  (destroy-all-clients)
   (f))

@@ -21,6 +21,13 @@
            (destroy-all-records-departments)
            (all-records-departments)))))
 
+(deftest test-destroy-all-clients
+  (is (= []
+         (do
+           (create-client {:first_name "Bob"})
+           (destroy-all-clients)
+           (all-clients)))))
+
 (deftest test-create-client
   (testing "creates a join record for a single records department"
     (let [records-department (create-records-department {:department_title "DFCI"})
