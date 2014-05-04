@@ -13,12 +13,9 @@
 
 (defn create-client []
   (set-driver! {:browser :firefox})
-  (to "http://localhost:3000"))
-
-  (click "a[href*='login']")
-
-  (input-text "#login_field" "dog")
-  (input-text "#password" "patch")
-
-  (submit "#password")
+  (to "http://localhost:3000")
+  (click "#clients-index")
+  (click "#new-client")
+  (input-text "#first_name" "Ben")
+  (submit ".btn")
   (quit))

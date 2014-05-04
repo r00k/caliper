@@ -48,7 +48,7 @@
                 (html
                   [:h2 "Clients"]
                   [:p
-                   [:a {:href "/clients/new"} "Add new"]]
+                   [:a {:href "/clients/new" :id "new-client"} "Add new"]]
                   [:br]
                   [:table.table
                    [:tr
