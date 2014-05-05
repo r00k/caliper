@@ -55,13 +55,15 @@
                     [:th "First name"]
                     [:th "Last name"]
                     [:th "DOB"]
-                    [:th "Date of accident"]]
-                   (for [{:keys [first_name last_name date_of_birth date_of_accident]} clients]
+                    [:th "Date of accident"]
+                    [:th "Records depts"]]
+                   (for [{:keys [first_name last_name date_of_birth date_of_accident records_departments]} clients]
                      [:tr
                       [:td first_name]
                       [:td last_name]
                       [:td date_of_birth]
-                      [:td date_of_accident]])]))}))
+                      [:td date_of_accident]
+                      [:td (map :department_title records_departments)]])]))}))
 
 (defn create-client [params]
   (db/create-client params)

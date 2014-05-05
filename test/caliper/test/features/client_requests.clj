@@ -36,5 +36,5 @@
   (click "#clients-index")
   (click "#new-client")
   (input-text "#first_name" "Ben")
-  (select "#records_department_id")
+  (select "#records_department_ids")
   (submit ".btn"))
