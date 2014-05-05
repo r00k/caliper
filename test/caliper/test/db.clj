@@ -31,14 +31,14 @@
 (deftest test-create-client
   (testing "creates a join record for a single records department"
     (let [records-department (create-records-department {:department_title "DFCI"})
-          client (create-client {:records_department_ids (vector (:id records-department))})]
+          client (create-client {"records_department_ids" (vector (:id records-department))})]
       (is (not-empty (select clients_records_departments 
                              (where {:clients_id (:id client)
                                      :records_departments_id (:id records-department)}))))))
   (testing "creates join records when multiple depts are specified"
     (let [records-department-one (create-records-department {:department_title "One"})
           records-department-two (create-records-department {:department_title "Two"})
-          client (create-client {:records_department_ids (map :id [records-department-one records-department-two])})]
+          client (create-client {"records_department_ids" (map :id [records-department-one records-department-two])})]
       (is (and
             (not-empty (select clients_records_departments
                              (where {:clients_id (:id client)

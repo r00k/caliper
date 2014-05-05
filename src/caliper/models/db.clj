@@ -31,12 +31,12 @@
 
 (defn create-clients-records-departments
   [client_id records_department_ids]
-  {:pre [(not (empty? records_department_ids))]}
-  (println (map type records_department_ids))
   (doall
     (map
       (partial create-clients-records-department client_id)
-      (map char-to-int records_department_ids))))
+      (if (char? (first records_department_ids))
+        (map char-to-int records_department_ids)
+        records_department_ids))))
 
 ;; Clients
 (defentity clients
