@@ -71,7 +71,7 @@
     client))
 
 (defn all-clients []
-  (select clients))
+  (select clients (with records_departments)))
 
 (defn find-client [id]
   (first (select clients
