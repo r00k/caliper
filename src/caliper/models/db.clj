@@ -14,7 +14,14 @@
 ;; ClientsRecordsDepartments
 (defentity clients_records_departments)
 
-(defn create-clients-records-department 
+(defn- char-to-int
+  "Needed because wrap-params sends in single-digit
+  integers as chars(!?)"
+  [c]
+  {:pre [(char? c)]}
+  (Integer/parseInt (str c)))
+
+(defn create-clients-records-department
   [client_id records_department_id]
   {:pre [(integer? records_department_id)
          (integer? client_id)]}
@@ -24,10 +31,11 @@
 (defn create-clients-records-departments
   [client_id records_department_ids]
   {:pre [(not (empty? records_department_ids))]}
+  (println (map type records_department_ids))
   (doall
     (map
       (partial create-clients-records-department client_id)
-      records_department_ids)))
+      (map char-to-int records_department_ids))))
 
 ;; Clients
 (defentity clients
