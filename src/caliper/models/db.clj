@@ -14,13 +14,20 @@
 ;; ClientsRecordsDepartments
 (defentity clients_records_departments)
 
-(defn create-clients-records-department [client_id records_department_id]
+(defn create-clients-records-department 
+  [client_id records_department_id]
+  {:pre [(integer? records_department_id)
+         (integer? client_id)]}
   (insert clients_records_departments (values {:clients_id client_id
                                                :records_departments_id records_department_id})))
 
-(defn create-clients-records-departments [client_id records_department_ids]
+(defn create-clients-records-departments
+  [client_id records_department_ids]
+  {:pre [(not (empty? records_department_ids))]}
   (doall
-    (map (partial create-clients-records-department client_id) records_department_ids)))
+    (map
+      (partial create-clients-records-department client_id)
+      records_department_ids)))
 
 ;; Clients
 (defentity clients
@@ -51,7 +58,7 @@
         client (insert clients (values parsed-attributes))]
     (create-clients-records-departments
       (:id client)
-      (:records_department_ids client-attributes))
+      (get client-attributes "records_department_ids"))
     client))
 
 (defn all-clients []
