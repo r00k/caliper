@@ -25,8 +25,9 @@
   [client_id records_department_id]
   {:pre [(integer? records_department_id)
          (integer? client_id)]}
-  (insert clients_records_departments (values {:clients_id client_id
-                                               :records_departments_id records_department_id})))
+  (insert clients_records_departments 
+          (values {:clients_id client_id
+                   :records_departments_id records_department_id})))
 
 (defn create-clients-records-departments
   [client_id records_department_ids]
