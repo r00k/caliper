@@ -14,13 +14,6 @@
 ;; ClientsRecordsDepartments
 (defentity clients_records_departments)
 
-(defn- char-to-int
-  "Needed because wrap-params sends in single-digit
-  integers as chars(!?)"
-  [c]
-  {:pre [(char? c)]}
-  (Integer/parseInt (str c)))
-
 (defn create-clients-records-department
   [client_id records_department_id]
   {:pre [(integer? records_department_id)
@@ -31,12 +24,11 @@
 
 (defn create-clients-records-departments
   [client_id records_department_ids]
+  {:pre [(every? integer? records_department_ids)]}
   (doall
     (map
       (partial create-clients-records-department client_id)
-      (if (char? (first records_department_ids))
-        (map char-to-int records_department_ids)
-        records_department_ids))))
+      records_department_ids)))
 
 ;; Clients
 (defentity clients
@@ -62,12 +54,19 @@
       (parse-dates)
       (remove-records-departments-ids)))
 
+(defn- parse-ids
+  [ids]
+  {:pre [(every? string? ids)]
+   :post [(every? integer? %)]}
+  (map (fn [x] (Integer/parseInt x)) ids))
+
 (defn create-client [client-attributes]
   (let [parsed-attributes (parse-client-attributes client-attributes)
-        client (insert clients (values parsed-attributes))]
+        client (insert clients (values parsed-attributes))
+        parsed-rec-dept-ids (parse-ids (get client-attributes "records_department_ids"))]
     (create-clients-records-departments
       (:id client)
-      (get client-attributes "records_department_ids"))
+      parsed-rec-dept-ids)
     client))
 
 (defn all-clients []
