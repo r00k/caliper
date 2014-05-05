@@ -54,19 +54,20 @@
       (parse-dates)
       (remove-records-departments-ids)))
 
-(defn- parse-ids
+(defn- normalize-form-ids
   [ids]
-  {:pre [(every? string? ids)]
-   :post [(every? integer? %)]}
-  (map (fn [x] (Integer/parseInt x)) ids))
+  {:post [(every? integer? %)]}
+  (if (coll? ids)
+    (map (fn [x] (Integer/parseInt x)) ids)
+    (vector (Integer/parseInt ids))))
 
 (defn create-client [client-attributes]
   (let [parsed-attributes (parse-client-attributes client-attributes)
         client (insert clients (values parsed-attributes))
-        parsed-rec-dept-ids (parse-ids (get client-attributes "records_department_ids"))]
+        rec-dept-ids (normalize-form-ids (get client-attributes "records_department_ids"))]
     (create-clients-records-departments
       (:id client)
-      parsed-rec-dept-ids)
+      rec-dept-ids)
     client))
 
 (defn all-clients []
