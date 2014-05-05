@@ -56,10 +56,12 @@
 
 (defn- normalize-form-ids
   [ids]
-  {:post [(every? integer? %)]}
+  {:pre [(every? string? ids)]
+   :post [(every? integer? %)]}
   (if (coll? ids)
     (map (fn [x] (Integer/parseInt x)) ids)
-    (vector (Integer/parseInt ids))))
+    (when ids
+      (vector (Integer/parseInt ids)))))
 
 (defn create-client [client-attributes]
   (let [parsed-attributes (parse-client-attributes client-attributes)
