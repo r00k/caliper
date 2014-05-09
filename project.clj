@@ -9,10 +9,6 @@
                  [korma "0.3.1"]
                  [org.clojure/clojure "1.6.0"]
                  [com.taoensso/tower "2.0.2"]
-                 [log4j "1.2.17" :exclusions [javax.mail/mail
-                                              javax.jms/jms
-                                              com.sun.jdmk/jmxtools
-                                              com.sun.jmx/jmxri]]
                  [selmer "0.6.5"]
                  [lib-noir "0.8.1"]
                  [compojure "1.1.6"]
