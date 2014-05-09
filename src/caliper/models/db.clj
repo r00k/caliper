@@ -55,18 +55,19 @@
       (remove-records-departments-ids)))
 
 (defn- normalize-form-ids
+  "Normalizes ids that can be \"34\" or [\"34\"] or []"
   [ids]
-  {:pre [(every? string? ids)]
-   :post [(every? integer? %)]}
+  {:pre [(or (string? ids) (every? string? ids))]
+   :post [(and (coll? %)
+               (every? integer? %))]}
   (if (coll? ids)
     (map (fn [x] (Integer/parseInt x)) ids)
-    (when ids
-      (vector (Integer/parseInt ids)))))
+    (vector (Integer/parseInt ids))))
 
 (defn create-client [client-attributes]
   (let [parsed-attributes (parse-client-attributes client-attributes)
         client (insert clients (values parsed-attributes))
-        rec-dept-ids (normalize-form-ids (get client-attributes "records_department_ids"))]
+        rec-dept-ids (normalize-form-ids (get client-attributes "records_department_ids" []))]
     (create-clients-records-departments
       (:id client)
       rec-dept-ids)
