@@ -17,20 +17,22 @@
       {:role "form"} [:post "/clients"]
       [:legend "New client"]
       [:div.form-group
-       [:label { :for "first_name" } "First name"]
+       [:label {:for "first_name"} "First name"]
        (text-field {:class "form-control"} "first_name")]
 
       [:div.form-group
-       [:label { :for "last_name" } "Last name"]
+       [:label {:for "last_name"} "Last name"]
        (text-field {:class "form-control"} "last_name")]
 
       [:div.form-group
-       [:label { :for "date_of_birth" } "Date of birth"]
-       (text-field {:class "form-control" :placeholder "YYYY-MM-DD"} "date_of_birth")]
+       [:label {:for "date_of_birth"} "Date of birth"]
+       (text-field {:class "form-control" :placeholder "YYYY-MM-DD"}
+                   "date_of_birth")]
 
       [:div.form-group
-       [:label { :for "date_of_accident" } "Date of accident"]
-       (text-field {:class "form-control" :placeholder "YYYY-MM-DD"} "date_of_accident")]
+       [:label {:for "date_of_accident"} "Date of accident"]
+       (text-field {:class "form-control" :placeholder "YYYY-MM-DD"}
+                   "date_of_accident")]
 
       [:label {:for "treatments"} "Records Departments"]
       (records-departments-options)
