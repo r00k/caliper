@@ -14,7 +14,8 @@
                  [compojure "1.1.6"]
                  [postgresql/postgresql "9.1-901.jdbc4"]
                  [hiccup "1.0.5"]
-                 [clj-time "0.7.0"]]
+                 [clj-time "0.7.0"]
+                 [heroku-database-url-to-jdbc "0.2.0"]]
   :ring {:handler caliper.handler/app,
          :init caliper.handler/init,
          :destroy caliper.handler/destroy}
