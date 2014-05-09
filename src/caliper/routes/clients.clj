@@ -3,43 +3,13 @@
   (:require [hiccup.core :refer :all])
   (:require [hiccup.form :as f])
   (:require [caliper.models.db :as db])
-  (:require [caliper.views.layout :as layout]))
-
-(defn records-departments-options []
-  (for [{:keys [id department_title]} (db/all-records-departments)]
-    [:div.checkbox
-     [:label
-      (f/check-box "records_department_ids" false id)
-      department_title]]))
-
-(defn- client-form []
-  (f/form-to {:role "form"} [:post "/clients"]
-             [:legend "New client"]
-             [:div.form-group
-              [:label { :for "first_name" } "First name"]
-              (f/text-field {:class "form-control"} "first_name")]
-
-             [:div.form-group
-              [:label { :for "last_name" } "Last name"]
-              (f/text-field {:class "form-control"} "last_name")]
-
-             [:div.form-group
-              [:label { :for "date_of_birth" } "Date of birth"]
-              (f/text-field {:class "form-control" :placeholder "YYYY-MM-DD"} "date_of_birth")]
-
-             [:div.form-group
-              [:label { :for "date_of_accident" } "Date of accident"]
-              (f/text-field {:class "form-control" :placeholder "YYYY-MM-DD"} "date_of_accident")]
-
-             [:label {:for "treatments"} "Records Departments"]
-             (records-departments-options)
-
-             (f/submit-button {:class "btn btn-default"} "Create client")))
+  (:require [caliper.views.layout :as layout])
+  (:require [caliper.views.clients :as views]))
 
 (defn new-client []
   (layout/render
     "app.html"
-    {:content (html (client-form))}))
+    {:content (html (views/client-form))}))
 
 (defn client-index []
   (layout/render
