@@ -19,8 +19,7 @@
   (testing "the selected records department is shown"
     (do
       (create-client-with-records-department "DFCI")
-      (is (find-element {:tag :td
-                         :text "DFCI"}))))
+      (is (find-element {:text "DFCI"}))))
   (browser-down))
 
 (defn create-client []
