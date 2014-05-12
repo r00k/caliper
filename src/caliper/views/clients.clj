@@ -1,5 +1,6 @@
 (ns caliper.views.clients
   (:use hiccup.core
+        hiccup.element
         hiccup.form
         caliper.views.layout)
   (:require [caliper.models.db :as db]))
@@ -39,6 +40,13 @@
 
       (submit-button {:class "btn btn-default"} "Create client"))))
 
+(defn records-request-link [client records-department]
+  (link-to
+    (format "/records-request?client_id=%s&records_department_id=%s"
+            (:id client)
+            (:id records-department))
+    (:department_title records-department)))
+
 (defn index []
   (let [clients (db/all-clients)]
     (html
@@ -55,11 +63,13 @@
         [:th "Records depts"]]
        (for [{:keys [first_name last_name
                      date_of_birth date_of_accident
-                     records_departments]}
+                     records_departments]
+              :as client}
              clients]
          [:tr
           [:td first_name]
           [:td last_name]
           [:td date_of_birth]
           [:td date_of_accident]
-          [:td (map :department_title records_departments)]])])))
+          [:td 
+           (map (partial records-request-link client) records_departments)]])])))

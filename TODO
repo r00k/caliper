@@ -4,6 +4,9 @@ Consistent database truncation between tests
 Get records_departments_ids key to be a keyword, not a string
 Move param parsing out of db namespace
 Have browser tests boot their own server
+Write macro for integration test that: 
+  - makes sure browser comes up/down 
+  - wraps in try/finally
 
 
 Feedback from Josh 4/28:
