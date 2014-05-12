@@ -10,7 +10,7 @@ html, body {
 /* Records Requests */
 /* ===========================================*/
 .letterhead {
-  float: right;
+  text-align: right;
 }
 
 section.contact-info {
