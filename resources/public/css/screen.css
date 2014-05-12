@@ -52,9 +52,9 @@ section.signoff .closing {
 }
 
 #sig {
-  width: 250px;
+  width: 200px;
 }
 
 section.enc {
-  margin-top: 4em;
+  margin-top: 1em;
 }
