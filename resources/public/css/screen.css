@@ -9,8 +9,18 @@ html, body {
 /* ===========================================*/
 /* Records Requests */
 /* ===========================================*/
-.letterhead {
+
+body.records-request {
+  font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+  font-size: 18px;
+}
+
+section.letterhead {
   text-align: right;
+}
+
+img#letterhead {
+  width: 300px;
 }
 
 section.contact-info {
