@@ -38,6 +38,15 @@ section.client-info {
   margin-bottom: 2em;
 }
 
+section.signoff {
+  text-align: center;
+}
+
+section.signoff .closing {
+  margin-top: 2em;
+  margin-bottom: 4em;
+}
+
 .date {
   margin-bottom: 2em;
 }
