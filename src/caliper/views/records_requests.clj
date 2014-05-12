@@ -8,10 +8,10 @@
 (defn- today-date []
   (let [today (t/today)]
     [:p.date (str (t/month today)
-             "/"
-             (t/day today)
-             "/"
-             (t/year today))]))
+                  "/"
+                  (t/day today)
+                  "/"
+                  (t/year today))]))
 
 (defn- letterhead []
   [:section.letterhead
@@ -47,30 +47,32 @@
   (list
     [:p "Dear Sir/Madam:"]
 
-    [:p (format "This is to request a <strong>complete, unabridged, and certified copy of any and all
-                records and bills</strong> in your possession regarding your care and treatment of
-                %s from %s to the present. Enclosed is a release authorizing
-                you to furnish me with the requested records. <strong>If the medical bills are copied
-                by another department, please forward a copy on to that department as well.</strong>"
+    [:p (format "This is to request a <strong>complete, unabridged, and
+                certified copy of any and all records and bills</strong> in
+                your possession regarding your care and treatment of %s from %s
+                to the present. Enclosed is a release authorizing you to
+                furnish me with the requested records. <strong>If the medical
+                bills are copied by another department, please forward a copy
+                on to that department as well.</strong>"
                 (str (:first_name client) " " (:last_name client))
                 (:date_of_accident client))]
 
-    [:p "When providing the materials as requested, kindly forward your bill for
-        duplication, and we will promptly reimburse you.
+    [:p "When providing the materials as requested, kindly forward your bill
+        for duplication, and we will promptly reimburse you.
 
-        Should you have any questions or concerns regarding compliance with this
-        request, kindly contact me at your earliest convenience. Otherwise, I will look
-        forward to receiving the requested records."]))
+        Should you have any questions or concerns regarding compliance with
+        this request, kindly contact me at your earliest convenience.
+        Otherwise, I will look forward to receiving the requested records."]))
 
 (defn- signoff []
   [:section.signoff
-  [:p "Very truly yours,"]
-  (image {:id "sig"} "/img/josh-sig.png")
-  [:p "Joshua P. Zisson"]])
+   [:p "Very truly yours,"]
+   (image {:id "sig"} "/img/josh-sig.png")
+   [:p "Joshua P. Zisson"]])
 
 (defn- enc []
   [:section.enc
-  [:p "Enc."]])
+   [:p "Enc."]])
 
 (defn show [client records-department]
   (html
