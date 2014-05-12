@@ -3,6 +3,7 @@
             [caliper.routes.home :refer [home-routes]]
             [caliper.routes.clients :refer [client-routes]]
             [caliper.routes.records-departments :refer [records-departments-routes]]
+            [caliper.routes.records-requests :refer [records-requests-routes]]
             [caliper.middleware :as middleware]
             [noir.util.middleware :refer [app-handler]]
             [compojure.route :as route]
@@ -46,7 +47,11 @@
 
 (def app (app-handler
            ;; add your application routes here
-           [client-routes home-routes records-departments-routes app-routes]
+           [client-routes 
+            home-routes
+            records-departments-routes
+            records-requests-routes
+            app-routes]
            ;; add custom middleware here
            :middleware [middleware/template-error-page]
            ;; add access rules here

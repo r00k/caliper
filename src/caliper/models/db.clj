@@ -98,3 +98,8 @@
 (defn destroy-all-records-departments []
   (delete clients_records_departments)
   (delete records_departments))
+
+(defn find-records-department [id]
+  (first (select records_departments
+                 (where {:id id})
+                 (limit 1))))

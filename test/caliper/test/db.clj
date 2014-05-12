@@ -55,3 +55,8 @@
             (not-empty (select clients_records_departments
                                (where {:clients_id (:id client)
                                        :records_departments_id (:id records-department-two)}))))))))
+
+(deftest test-find-records-department
+  (let [records-department (create-records-department {:department_title "DFCI"})]
+    (is (not-empty (find-records-department (:id records-department))))))
+

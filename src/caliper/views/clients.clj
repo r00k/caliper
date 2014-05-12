@@ -40,11 +40,14 @@
 
       (submit-button {:class "btn btn-default"} "Create client"))))
 
+(defn records-request-url [client records-department]
+  (format "/records-request?client_id=%s&records_department_id=%s"
+          (:id client)
+          (:id records-department)))
+
 (defn records-request-link [client records-department]
   (link-to
-    (format "/records-request?client_id=%s&records_department_id=%s"
-            (:id client)
-            (:id records-department))
+    (records-request-url client records-department)
     (:department_title records-department)))
 
 (defn index []
