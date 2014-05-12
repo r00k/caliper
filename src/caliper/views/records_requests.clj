@@ -7,7 +7,7 @@
 
 (defn- today-date []
   (let [today (t/today)]
-    [:p (str (t/month today)
+    [:p.date (str (t/month today)
              "/"
              (t/day today)
              "/"
@@ -39,7 +39,7 @@
   (let [{:keys [id first_name last_name date_of_birth date_of_accident]}
         client]
     [:section.client-info
-     [:p (str first_name " " last_name)]
+     [:p (str "Re:   " first_name " " last_name)]
      [:p#date_of_birth (str "D.O.B. " date_of_birth)]
      [:p (str "Our File No. " id)]]))
 
@@ -47,11 +47,11 @@
   (list
     [:p "Dear Sir/Madam:"]
 
-    [:p (format "This is to request a complete, unabridged, and certified copy of any and all
-                records and bills in your possession regarding your care and treatment of
+    [:p (format "This is to request a <strong>complete, unabridged, and certified copy of any and all
+                records and bills</strong> in your possession regarding your care and treatment of
                 %s from %s to the present. Enclosed is a release authorizing
-                you to furnish me with the requested records. If the medical bills are copied
-                by another department, please forward a copy on to that department as well."
+                you to furnish me with the requested records. <strong>If the medical bills are copied
+                by another department, please forward a copy on to that department as well.</strong>"
                 (str (:first_name client) " " (:last_name client))
                 (:date_of_accident client))]
 
@@ -65,6 +65,7 @@
 (defn- signoff []
   [:section.signoff
   [:p "Very truly yours,"]
+  (image {:id "sig"} "/img/josh-sig.png")
   [:p "Joshua P. Zisson"]])
 
 (defn- enc []
