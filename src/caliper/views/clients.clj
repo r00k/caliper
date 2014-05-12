@@ -46,9 +46,11 @@
           (:id records-department)))
 
 (defn records-request-link [client records-department]
-  (link-to
-    (records-request-url client records-department)
-    (:department_title records-department)))
+  (list
+    (link-to
+      (records-request-url client records-department)
+      (:department_title records-department))
+    [:br]))
 
 (defn index []
   (let [clients (db/all-clients)]
