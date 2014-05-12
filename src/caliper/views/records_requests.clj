@@ -62,6 +62,15 @@
         request, kindly contact me at your earliest convenience. Otherwise, I will look
         forward to receiving the requested records."]))
 
+(defn- signoff []
+  [:section.signoff
+  [:p "Very truly yours,"]
+  [:p "Joshua P. Zisson"]])
+
+(defn- enc []
+  [:section.enc
+  [:p "Enc."]])
+
 (defn show [client records-department]
   (html
     [:div.records-request
@@ -72,4 +81,8 @@
      (client-info client)
 
      (prose client)
+
+     (signoff)
+
+     (enc)
      ]))

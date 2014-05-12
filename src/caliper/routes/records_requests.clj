@@ -17,7 +17,7 @@
         records-department (db/find-records-department 
                              (:records_department_id parsed))]
     (layout/render
-      "app.html"
+      "records_request.html"
       {:content 
        (views/show client records-department)})))
 
