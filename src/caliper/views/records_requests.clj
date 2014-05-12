@@ -58,8 +58,8 @@
 (defn- signoff []
   [:section.signoff
    [:p.closing "Very truly yours,"]
-   [:p "Joshua P. Zisson"]
-   (image {:id "sig"} "/img/josh-sig.png")])
+   (image {:id "sig"} "/img/josh-sig.png")
+   [:p "Joshua P. Zisson"]])
 
 (defn- enc []
   [:section.enc
