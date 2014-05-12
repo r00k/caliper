@@ -14,7 +14,7 @@
     (browser-up)
     (create-client-with-records-department "DFCI")
     (click {:tag :a :text "DFCI"})
-    (is (find-element {:tag :p :text "Joshua P. Zisson"}))
+    (is (find-element {:text "Ben Orenstein"}))
     (finally
       (browser-down))))
 
@@ -24,5 +24,8 @@
   (click "#clients-index")
   (click "#new-client")
   (input-text "#first_name" "Ben")
+  (input-text "#last_name" "Orenstein")
+  (input-text "#date_of_accident" "2014-04-05")
+  (input-text "#date_of_birth" "1983-04-16")
   (select "#records_department_ids")
   (submit ".btn"))

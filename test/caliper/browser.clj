@@ -8,7 +8,7 @@
   []
   (when (= 1 (swap! browser-count inc))
     (set-driver! {:browser :firefox})
-    (implicit-wait 2000)))
+    (implicit-wait 5000)))
 
 (defn browser-down
   "If this is the last request, shut the browser down."
